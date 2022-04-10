@@ -67,17 +67,17 @@
              <input type='text' name="username" placeholder="username" value="<?php if (isset($error)){
                  echo $username;
              }?>">
-             <br><br>
+            
              <input type='text' name="email" placeholder="email" value="<?php if (isset($error)){
                  echo $email ;
              }?>">
-             <br><br>
+            
              <input type='password' name="password" placeholder="password">
-             <br><br>
+             
              <input type='password' name="c_password" placeholder="confirm password">
-             <br><br>
+             
              <input type='submit' name="signup_btn" value='signup'>
-             <br><br>
+            
          </form>
 </div>
  </body>
