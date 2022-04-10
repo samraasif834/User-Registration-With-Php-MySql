@@ -1,7 +1,7 @@
  <!DOCTYPE html>
 
  <?php
- include 'connectionphp';
+ include 'connection.php';
  if(isset($_POST['signup_btn'])){
      $username=mysqli_real_escape_string($con,$_POST['username'] );
      $email=mysqli_real_escape_string($con,$_POST['email'] );
@@ -23,8 +23,17 @@
     }else {
         $check_email="SELECT * FROM form WHERE email='$email'";
         $data=mysqli_query($con,$check_email);
-        if($data>0){
-            $error='Email already exsist';+
+        $result=mysqli_fetch_array($data);
+        if($result>0){
+            $error='Email already exsist';
+        }else {
+
+            $password=md5($password);
+            $insert="INSERT INTO form (username,email,password) Values('$username','$email','$password')";
+            $q=mysqli_query($con,$insert);
+            if($q){
+                $success="your account has been created successfully";
+            }
         }
     }
 }
@@ -35,6 +44,7 @@
      <meta charset="UTF-8">
      <meta http-equiv="X-UA-Compatible" content="IE=edge">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel='stylesheet' type='text/css' href='signup.css'>
      <title>Document</title>
  </head>
  <body>
@@ -43,6 +53,13 @@
              <?php
                if(isset($error)){
                    echo $error;
+               }
+             ?>
+         </p>
+         <p style='color:green'>
+             <?php
+               if(isset($success)){
+                   echo $success;
                }
              ?>
          </p>
